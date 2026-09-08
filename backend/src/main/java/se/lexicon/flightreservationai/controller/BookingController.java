@@ -1,5 +1,6 @@
 package se.lexicon.flightreservationai.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,7 +34,7 @@ public class BookingController {
     }
 
     @PostMapping
-    public ResponseEntity<BookingResponse> bookFlight(@RequestBody BookingRequest request) {
+    public ResponseEntity<BookingResponse> bookFlight(@Valid @RequestBody BookingRequest request) {
         List<Passenger> passengers = request.passengers().stream()
                 .map(bookingMapper::toPassengerEntity)
                 .collect(Collectors.toList());
