@@ -9,6 +9,7 @@ public class FlightMapper {
 
     public FlightResponse toResponse(Flight flight) {
         return new FlightResponse(
+                flight.getId(),
                 flight.getFlightNumber(),
                 flight.getOrigin(),
                 flight.getDestination(),
