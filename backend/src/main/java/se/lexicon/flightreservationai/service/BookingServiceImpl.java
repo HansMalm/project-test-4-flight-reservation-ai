@@ -4,6 +4,8 @@ import se.lexicon.flightreservationai.entity.Booking;
 import se.lexicon.flightreservationai.entity.BookingStatus;
 import se.lexicon.flightreservationai.entity.Flight;
 import se.lexicon.flightreservationai.entity.Passenger;
+import se.lexicon.flightreservationai.exception.FlightBookingException;
+import se.lexicon.flightreservationai.exception.ResourceNotFoundException;
 import se.lexicon.flightreservationai.repository.BookingRepository;
 import se.lexicon.flightreservationai.repository.FlightRepository;
 import org.springframework.stereotype.Service;
@@ -33,12 +35,12 @@ public class BookingServiceImpl implements BookingService {
     @Transactional
     public Booking bookFlight(Long flightId, String contactName, String contactEmail, List<Passenger> passengers) {
         Flight flight = flightRepository.findById(flightId)
-                .orElseThrow(() -> new IllegalArgumentException("Flight not found: " + flightId));
+                .orElseThrow(() -> new ResourceNotFoundException("Flight not found: " + flightId));
 
         int seatsRequested = passengers.size();
         int updatedRows = flightRepository.decrementSeats(flightId, seatsRequested);
         if (updatedRows == 0) {
-            throw new IllegalStateException("Not enough seats available on flight " + flightId);
+            throw new FlightBookingException("Not enough seats available on flight " + flightId);
         }
 
         String bookingReference = flight.getFlightNumber() + "-" + REFERENCE_TIMESTAMP_FORMAT.format(Instant.now());
@@ -56,7 +58,7 @@ public class BookingServiceImpl implements BookingService {
     @Transactional
     public void cancelBooking(String bookingReference) {
         Booking booking = bookingRepository.findByBookingReference(bookingReference)
-                .orElseThrow(() -> new IllegalArgumentException("Booking not found: " + bookingReference));
+                .orElseThrow(() -> new ResourceNotFoundException("Booking not found: " + bookingReference));
 
         flightRepository.incrementSeats(booking.getFlight().getId(), booking.getNumberOfSeats());
         booking.setStatus(BookingStatus.CANCELLED);
