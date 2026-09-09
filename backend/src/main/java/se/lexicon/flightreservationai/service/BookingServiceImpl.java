@@ -33,14 +33,14 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     @Transactional
-    public Booking bookFlight(Long flightId, String contactName, String contactEmail, List<Passenger> passengers) {
-        Flight flight = flightRepository.findById(flightId)
-                .orElseThrow(() -> new ResourceNotFoundException("Flight not found: " + flightId));
+    public Booking bookFlight(String flightNumber, String contactName, String contactEmail, List<Passenger> passengers) {
+        Flight flight = flightRepository.findByFlightNumber(flightNumber)
+                .orElseThrow(() -> new ResourceNotFoundException("Flight not found: " + flightNumber));
 
         int seatsRequested = passengers.size();
-        int updatedRows = flightRepository.decrementSeats(flightId, seatsRequested);
+        int updatedRows = flightRepository.decrementSeats(flight.getId(), seatsRequested);
         if (updatedRows == 0) {
-            throw new FlightBookingException("Not enough seats available on flight " + flightId);
+            throw new FlightBookingException("Not enough seats available on flight " + flightNumber);
         }
 
         String bookingReference = flight.getFlightNumber() + "-" + REFERENCE_TIMESTAMP_FORMAT.format(Instant.now());

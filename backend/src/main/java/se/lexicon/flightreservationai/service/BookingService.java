@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BookingService {
 
-    Booking bookFlight(Long flightId, String contactName, String contactEmail, List<Passenger> passengers);
+    Booking bookFlight(String flightNumber, String contactName, String contactEmail, List<Passenger> passengers);
 
     void cancelBooking(String bookingReference);
 

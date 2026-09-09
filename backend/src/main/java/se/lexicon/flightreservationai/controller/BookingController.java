@@ -40,7 +40,7 @@ public class BookingController {
                 .collect(Collectors.toList());
 
         Booking booking = bookingService.bookFlight(
-                request.flightId(),
+                request.flightNumber(),
                 request.contactName(),
                 request.contactEmail(),
                 passengers
