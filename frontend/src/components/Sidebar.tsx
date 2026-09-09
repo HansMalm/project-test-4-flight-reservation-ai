@@ -9,9 +9,16 @@ const PRICE_STEP = 100
 interface SidebarProps {
   priceRange: [number, number]
   onPriceRangeChange: (range: [number, number]) => void
+  onlyAvailable: boolean
+  onAvailabilityChange: (onlyAvailable: boolean) => void
 }
 
-function Sidebar({ priceRange, onPriceRangeChange }: SidebarProps) {
+function Sidebar({
+  priceRange,
+  onPriceRangeChange,
+  onlyAvailable,
+  onAvailabilityChange,
+}: SidebarProps) {
   const [min, max] = priceRange
 
   // The two range inputs overlap, so only the one on top can be grabbed. When
@@ -43,6 +50,28 @@ function Sidebar({ priceRange, onPriceRangeChange }: SidebarProps) {
   return (
     <aside className="sidebar">
       <h2 className="sidebar-title">Filters</h2>
+
+      <div className="filter-group">
+        <h3>Availability</h3>
+        <label>
+          <input
+            type="radio"
+            name="availability"
+            checked={onlyAvailable}
+            onChange={() => onAvailabilityChange(true)}
+          />
+          Available flights
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="availability"
+            checked={!onlyAvailable}
+            onChange={() => onAvailabilityChange(false)}
+          />
+          All flights
+        </label>
+      </div>
 
       <div className="filter-group">
         <h3>Price</h3>

@@ -94,3 +94,8 @@
 .book-btn:hover {
   background: var(--accent-orange-dark);
 }
+
+.book-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}

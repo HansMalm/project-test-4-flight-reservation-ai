@@ -12,5 +12,6 @@ export interface Flight {
   duration: string
   price: string
   priceValue: number
+  seatsRemaining: number
   flag: FlagCode
 }

@@ -11,6 +11,7 @@ import ChatWidget from './components/ChatWidget'
 function App() {
   const [view, setView] = useState<View>('flights')
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000])
+  const [onlyAvailable, setOnlyAvailable] = useState(true)
 
   return (
     <>
@@ -18,8 +19,13 @@ function App() {
       <Hero />
       {view === 'flights' ? (
         <div className="layout">
-          <Sidebar priceRange={priceRange} onPriceRangeChange={setPriceRange} />
-          <FlightGrid priceRange={priceRange} />
+          <Sidebar
+            priceRange={priceRange}
+            onPriceRangeChange={setPriceRange}
+            onlyAvailable={onlyAvailable}
+            onAvailabilityChange={setOnlyAvailable}
+          />
+          <FlightGrid priceRange={priceRange} onlyAvailable={onlyAvailable} />
         </div>
       ) : (
         <MyBookings />
