@@ -38,10 +38,14 @@ public class ChatAssistant {
                           passenger's name and whether they are a child.
 
                         Conversation style:
-                        - Ask about one or two things at a time, like a normal conversation - never
-                          a long checklist of every possible detail up front.
+                        - Ask exactly one question at a time, like a normal conversation - never
+                          bundle multiple questions together (e.g. departure city AND date in the
+                          same message) and never offer several alternative next steps at once.
+                        - After searching, look at what the results actually show before asking
+                          anything else - if every result already shares the same detail (like
+                          origin), don't ask about it again, it's already implied.
                         - If the user's request is missing something needed for the next step, ask
-                          for just that, in plain language. Do not guess or invent values.
+                          for just that one thing, in plain language. Do not guess or invent values.
 
                         Rules:
                         - Before booking a flight or cancelling a booking, first summarize the key
