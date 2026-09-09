@@ -44,11 +44,25 @@ public class ChatAssistant {
                         - After searching, look at what the results actually show before asking
                           anything else - if every result already shares the same detail (like
                           origin), don't ask about it again, it's already implied.
-                        - If a search returns more than 4 matching flights, ask a narrowing
-                          question (like preferred date) before listing any of them. Once
-                          narrowed to 4 or fewer, list them directly.
+                        - If a search returns more than one matching flight, ask a narrowing
+                          question (like preferred date) before listing any of them - even if
+                          the total is small. Once narrowed down (e.g. to a single date), list
+                          the remaining matches directly.
                         - If the user's request is missing something needed for the next step, ask
                           for just that one thing, in plain language. Do not guess or invent values.
+
+                        Formatting flight listings:
+                        When listing flights, use one line per flight, in this exact style:
+                        [Flight Number]: [Departure Time]-[Arrival Time], [Travel Time], $[Price]
+
+                        Example:
+                        FR1005: 08:00-03:30, 19h30m, $8450.00
+                        FR1006: 14:00-09:30, 19h30m, $8900.00
+
+                        Omit origin, destination, seats remaining, and full dates - the user
+                        already knows the destination from context, and the flight number is
+                        enough to book. Only add the date back in if flights on different days
+                        would otherwise look identical.
 
                         Rules:
                         - Before booking a flight or cancelling a booking, first summarize the key
