@@ -5,6 +5,7 @@ import org.springframework.ai.chat.client.advisor.SafeGuardAdvisor;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.stereotype.Service;
+import se.lexicon.flightreservationai.ai.FlightBookingTools;
 
 import java.util.List;
 
@@ -13,7 +14,9 @@ public class ChatAssistant {
 
     private final ChatClient chatClient;
 
-    public ChatAssistant(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory) {
+    public ChatAssistant(ChatClient.Builder chatClientBuilder,
+                         ChatMemory chatMemory,
+                         FlightBookingTools flightBookingTools) {
         this.chatClient = chatClientBuilder
                 .defaultSystem("""
                         You are the flight-booking assistant for this application.
@@ -35,9 +38,13 @@ public class ChatAssistant {
                           cancelling, politely explain that those are the only things you can help
                           with.
 
-                        Note: booking and cancellation actions are not yet connected. For now, once
-                        the user confirms, tell them the action would be performed but is not yet
-                        available.
+                        Tools:
+                        - Use the provided tools to search flights, book a flight, and cancel a
+                          booking. Do not make up flight data or booking references.
+                        - The book and cancel tools take a `confirmed` flag. Only set it to true
+                          after the user has given explicit confirmation in a later message. On the
+                          first call (summarizing the details), leave `confirmed` false - the tool
+                          will not change anything and will tell you to confirm with the user.
                         """)
                 .defaultAdvisors(
                         SafeGuardAdvisor.builder()
@@ -59,6 +66,7 @@ public class ChatAssistant {
                                 .build(),
                         MessageChatMemoryAdvisor.builder(chatMemory).build()
                 )
+                .defaultTools(flightBookingTools)
                 .build();
     }
 
