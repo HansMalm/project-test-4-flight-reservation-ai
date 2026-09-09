@@ -78,6 +78,7 @@
   margin: 0;
   color: var(--ink-soft);
   font-size: 18px;
+  font-weight: 600;
 }
 
 .chat-message {
@@ -85,6 +86,7 @@
   padding: 8px 12px;
   border-radius: 10px;
   font-size: 18px;
+  font-weight: 600;
   line-height: 1.4;
   white-space: pre-wrap;
 }
@@ -105,6 +107,7 @@
   color: var(--ink-soft);
   font-style: italic;
   font-size: 18px;
+  font-weight: 600;
 }
 
 .chat-input-row {
@@ -123,6 +126,7 @@
   background: var(--paper);
   font-family: var(--font-body);
   font-size: 18px;
+  font-weight: 600;
   color: var(--ink);
 }
 

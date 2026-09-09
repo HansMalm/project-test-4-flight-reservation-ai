@@ -38,6 +38,7 @@
 
 .flight-card-airport .city {
   font-size: 16px;
+  font-weight: 600;
   color: var(--ink-soft);
 }
 
@@ -59,6 +60,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   font-size: 17px;
+  font-weight: 600;
   color: var(--ink-soft);
   border-top: 1px solid var(--rule);
   padding-top: 10px;
