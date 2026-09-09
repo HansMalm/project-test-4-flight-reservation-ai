@@ -11,5 +11,6 @@ export interface Flight {
   arrival: string
   duration: string
   price: string
+  priceValue: number
   flag: FlagCode
 }

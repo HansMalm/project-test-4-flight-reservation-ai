@@ -60,6 +60,7 @@ export function toDisplayFlight(apiFlight: ApiFlight): Flight {
     arrival: formatArrival(apiFlight.departureTime, apiFlight.arrivalTime),
     duration: formatDuration(apiFlight.departureTime, apiFlight.arrivalTime),
     price: formatPrice(apiFlight.price),
+    priceValue: apiFlight.price,
     flag: destination?.flag ?? 'france',
   }
 }
