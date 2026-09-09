@@ -9,6 +9,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import se.lexicon.flightreservationai.dto.PassengerInfo;
 import se.lexicon.flightreservationai.entity.Booking;
 import se.lexicon.flightreservationai.entity.Passenger;
+import se.lexicon.flightreservationai.exception.FlightBookingException;
+import se.lexicon.flightreservationai.exception.ResourceNotFoundException;
 import se.lexicon.flightreservationai.service.BookingService;
 import se.lexicon.flightreservationai.service.FlightService;
 
@@ -21,6 +23,7 @@ import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
@@ -77,6 +80,42 @@ class FlightBookingToolsTest {
 
         assertThat(result).isEqualTo(
                 "Booking confirmed. Reference: FR123-20260101000000. Total price: 2500.00 for 2 passenger(s).");
+    }
+
+    @Test
+    void bookFlight_confirmed_flightNotFound_returnsGracefulMessage() {
+        when(bookingService.bookFlight(eq("FR999"), any(), any(), anyList()))
+                .thenThrow(new ResourceNotFoundException("Flight not found: FR999"));
+
+        String result = tools.bookFlight(
+                "FR999", "Jane Doe", "jane@example.com",
+                List.of(new PassengerInfo("Jane Doe", false)),
+                true);
+
+        assertThat(result).isEqualTo("Booking failed: Flight not found: FR999");
+    }
+
+    @Test
+    void bookFlight_confirmed_notEnoughSeats_returnsGracefulMessage() {
+        when(bookingService.bookFlight(eq("FR123"), any(), any(), anyList()))
+                .thenThrow(new FlightBookingException("Not enough seats available on flight FR123"));
+
+        String result = tools.bookFlight(
+                "FR123", "Jane Doe", "jane@example.com",
+                List.of(new PassengerInfo("Jane Doe", false), new PassengerInfo("Tim Doe", true)),
+                true);
+
+        assertThat(result).isEqualTo("Booking failed: Not enough seats available on flight FR123");
+    }
+
+    @Test
+    void cancelBooking_confirmed_bookingNotFound_returnsGracefulMessage() {
+        doThrow(new ResourceNotFoundException("Booking not found: BR999"))
+                .when(bookingService).cancelBooking("BR999");
+
+        String result = tools.cancelBooking("BR999", true);
+
+        assertThat(result).isEqualTo("Cancellation failed: Booking not found: BR999");
     }
 
     @Test

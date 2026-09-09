@@ -6,6 +6,8 @@ import se.lexicon.flightreservationai.dto.PassengerInfo;
 import se.lexicon.flightreservationai.entity.Booking;
 import se.lexicon.flightreservationai.entity.Flight;
 import se.lexicon.flightreservationai.entity.Passenger;
+import se.lexicon.flightreservationai.exception.FlightBookingException;
+import se.lexicon.flightreservationai.exception.ResourceNotFoundException;
 import se.lexicon.flightreservationai.service.BookingService;
 import se.lexicon.flightreservationai.service.FlightService;
 
@@ -54,11 +56,15 @@ public class FlightBookingTools {
                 .map(info -> new Passenger(info.name(), info.isChild(), null))
                 .toList();
 
-        Booking booking = bookingService.bookFlight(flightNumber, contactName, contactEmail, passengerEntities);
+        try {
+            Booking booking = bookingService.bookFlight(flightNumber, contactName, contactEmail, passengerEntities);
 
-        return "Booking confirmed. Reference: " + booking.getBookingReference()
-                + ". Total price: " + booking.getTotalPrice()
-                + " for " + booking.getNumberOfSeats() + " passenger(s).";
+            return "Booking confirmed. Reference: " + booking.getBookingReference()
+                    + ". Total price: " + booking.getTotalPrice()
+                    + " for " + booking.getNumberOfSeats() + " passenger(s).";
+        } catch (ResourceNotFoundException | FlightBookingException ex) {
+            return "Booking failed: " + ex.getMessage();
+        }
     }
 
     @Tool(description = "Cancel an existing booking by its booking reference. Only set confirmed=true "
@@ -69,8 +75,12 @@ public class FlightBookingTools {
                     + bookingReference + ", then call this tool again with confirmed=true.";
         }
 
-        bookingService.cancelBooking(bookingReference);
+        try {
+            bookingService.cancelBooking(bookingReference);
 
-        return "Booking " + bookingReference + " has been cancelled.";
+            return "Booking " + bookingReference + " has been cancelled.";
+        } catch (ResourceNotFoundException | FlightBookingException ex) {
+            return "Cancellation failed: " + ex.getMessage();
+        }
     }
 }
