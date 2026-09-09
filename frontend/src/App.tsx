@@ -6,6 +6,7 @@ import Sidebar from './components/Sidebar'
 import FlightGrid from './components/FlightGrid'
 import MyBookings from './components/MyBookings'
 import Footer from './components/Footer'
+import ChatWidget from './components/ChatWidget'
 
 function App() {
   const [view, setView] = useState<View>('flights')
@@ -23,6 +24,7 @@ function App() {
         <MyBookings />
       )}
       <Footer />
+      <ChatWidget />
     </>
   )
 }
