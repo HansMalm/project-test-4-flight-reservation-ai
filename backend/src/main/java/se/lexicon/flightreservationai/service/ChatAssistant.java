@@ -2,6 +2,8 @@ package se.lexicon.flightreservationai.service;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.SafeGuardAdvisor;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +13,7 @@ public class ChatAssistant {
 
     private final ChatClient chatClient;
 
-    public ChatAssistant(ChatClient.Builder chatClientBuilder) {
+    public ChatAssistant(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory) {
         this.chatClient = chatClientBuilder
                 .defaultSystem("""
                         You are the flight-booking assistant for this application.
@@ -54,13 +56,15 @@ public class ChatAssistant {
                                         I can't help with requests that include sensitive credentials or personal identifiers. \
                                         Please remove that and try again.
                                         """)
-                                .build()
+                                .build(),
+                        MessageChatMemoryAdvisor.builder(chatMemory).build()
                 )
                 .build();
     }
 
-    public String chat(String message) {
+    public String chat(String chatId, String message) {
         return chatClient.prompt()
+                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, chatId))
                 .user(message)
                 .call()
                 .content();

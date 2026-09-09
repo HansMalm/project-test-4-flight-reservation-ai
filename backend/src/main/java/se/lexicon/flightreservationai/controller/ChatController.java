@@ -22,7 +22,7 @@ public class ChatController {
 
     @PostMapping
     public ResponseEntity<ChatResponse> chat(@Valid @RequestBody ChatRequest request) {
-        String reply = chatAssistant.chat(request.message());
+        String reply = chatAssistant.chat(request.chatId(), request.message());
         return ResponseEntity.ok(new ChatResponse(reply));
     }
 }
