@@ -56,8 +56,9 @@ function FlightCard({ flight, onBook }: FlightCardProps) {
           type="button"
           className="book-btn"
           onClick={() => onBook(flight)}
+          disabled={flight.seatsRemaining === 0}
         >
-          Book
+          {flight.seatsRemaining === 0 ? 'Full' : 'Book'}
         </button>
       </div>
     </article>

@@ -8,23 +8,24 @@ import './FlightGrid.css'
 
 interface FlightGridProps {
   priceRange: [number, number]
+  onlyAvailable: boolean
 }
 
-function FlightGrid({ priceRange }: FlightGridProps) {
+function FlightGrid({ priceRange, onlyAvailable }: FlightGridProps) {
   const [flights, setFlights] = useState<Flight[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [bookingFlight, setBookingFlight] = useState<Flight | null>(null)
 
   // useCallback keeps this the same function between renders, so the useEffect
-  // below doesn't re-run on every render. We also call reload() after a
-  // successful booking to pick up the reduced seat counts — it only touches
-  // `flights`/`error`, never `loading`, so the grid (and the open modal on top
-  // of it) stays mounted.
+  // below only re-runs when `onlyAvailable` changes (toggling the filter
+  // re-fetches). We also call reload() after a successful booking to pick up
+  // the reduced seat counts — it only touches `flights`/`error`, never
+  // `loading`, so the grid (and the open modal on top of it) stays mounted.
   const reload = useCallback(() => {
     let cancelled = false
 
-    fetchFlights()
+    fetchFlights(onlyAvailable)
       .then((apiFlights) => {
         if (cancelled) return
         setFlights(apiFlights.map(toDisplayFlight))
@@ -44,7 +45,7 @@ function FlightGrid({ priceRange }: FlightGridProps) {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [onlyAvailable])
 
   useEffect(() => reload(), [reload])
 

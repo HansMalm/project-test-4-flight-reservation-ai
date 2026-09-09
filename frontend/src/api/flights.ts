@@ -8,8 +8,11 @@ export interface ApiFlight {
   price: number;
 }
 
-export async function fetchFlights(): Promise<ApiFlight[]> {
-  const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/flights`);
+export async function fetchFlights(
+  onlyAvailable: boolean,
+): Promise<ApiFlight[]> {
+  const path = onlyAvailable ? '/api/flights/available' : '/api/flights';
+  const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}${path}`);
 
   if (!res.ok) {
     throw new Error(
