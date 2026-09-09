@@ -24,17 +24,25 @@
   gap: 28px;
 }
 
-.navbar-links a {
+.navbar-links button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
   color: var(--navbar-text);
-  text-decoration: none;
+  font-family: var(--font-body);
   font-size: 14px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   opacity: 0.85;
 }
 
-.navbar-links a:hover {
+.navbar-links button:hover {
   opacity: 1;
   text-decoration: underline;
-  color: var(--navbar-text);
+}
+
+.navbar-links button.active {
+  opacity: 1;
+  text-decoration: underline;
 }

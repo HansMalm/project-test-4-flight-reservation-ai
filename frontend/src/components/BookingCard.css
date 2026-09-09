@@ -1,0 +1,86 @@
+.booking-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.booking-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.booking-card-ref {
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.booking-status {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border-radius: 3px;
+  border: 1px solid currentColor;
+}
+
+.booking-status-confirmed {
+  color: var(--accent-orange-dark);
+}
+
+.booking-status-cancelled {
+  color: var(--ink-soft);
+}
+
+.booking-card-route {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.booking-card-route .code {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.booking-card-route .arrow {
+  color: var(--accent-orange);
+}
+
+.booking-card-route .cities {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-left: 4px;
+}
+
+.booking-card-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--rule);
+  padding-top: 10px;
+}
+
+.booking-card-passengers {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+.booking-card-passengers .child-tag {
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
+.booking-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

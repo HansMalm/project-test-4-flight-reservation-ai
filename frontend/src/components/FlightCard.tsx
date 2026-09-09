@@ -4,9 +4,10 @@ import './FlightCard.css'
 
 interface FlightCardProps {
   flight: Flight
+  onBook: (flight: Flight) => void
 }
 
-function FlightCard({ flight }: FlightCardProps) {
+function FlightCard({ flight, onBook }: FlightCardProps) {
   return (
     <article className="flight-card">
       <div className="flight-card-flag">
@@ -51,7 +52,13 @@ function FlightCard({ flight }: FlightCardProps) {
 
       <div className="flight-card-footer">
         <span className="price">{flight.price}</span>
-        <button type="button" className="book-btn">Book</button>
+        <button
+          type="button"
+          className="book-btn"
+          onClick={() => onBook(flight)}
+        >
+          Book
+        </button>
       </div>
     </article>
   )
