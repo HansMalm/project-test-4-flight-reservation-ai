@@ -58,6 +58,13 @@ function CountryFlag({ code }: CountryFlagProps) {
             <circle cx="14" cy="10" r="0.8" fill="#fff" />
           </>
         )}
+        {code === 'sweden' && (
+          <>
+            <rect width="20" height="14" fill="#006AA7" />
+            <rect x="6" width="3" height="14" fill="#FECC02" />
+            <rect y="5.5" width="20" height="3" fill="#FECC02" />
+          </>
+        )}
       </svg>
     </span>
   )
