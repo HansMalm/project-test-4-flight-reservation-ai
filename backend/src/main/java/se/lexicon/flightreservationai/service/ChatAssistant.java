@@ -44,6 +44,9 @@ public class ChatAssistant {
                         - After searching, look at what the results actually show before asking
                           anything else - if every result already shares the same detail (like
                           origin), don't ask about it again, it's already implied.
+                        - If a search returns more than 4 matching flights, ask a narrowing
+                          question (like preferred date) before listing any of them. Once
+                          narrowed to 4 or fewer, list them directly.
                         - If the user's request is missing something needed for the next step, ask
                           for just that one thing, in plain language. Do not guess or invent values.
 

@@ -13,6 +13,7 @@ function ChatWidget() {
   const [loading, setLoading] = useState(false)
 
   const listRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   // Keep the newest message in view whenever the list grows or the typing
   // indicator toggles.
@@ -20,6 +21,12 @@ function ChatWidget() {
     const list = listRef.current
     if (list) list.scrollTop = list.scrollHeight
   }, [messages, loading])
+
+  // Focus the message input when the panel opens so the user can type right
+  // away without clicking it first.
+  useEffect(() => {
+    if (open) inputRef.current?.focus()
+  }, [open])
 
   // Close the panel on Escape while it's open. Cleanup removes the listener so
   // it doesn't pile up across opens. Same pattern as BookingModal.
@@ -110,6 +117,7 @@ function ChatWidget() {
 
           <form className="chat-input-row" onSubmit={handleSubmit}>
             <input
+              ref={inputRef}
               type="text"
               placeholder="Type a message…"
               value={input}
