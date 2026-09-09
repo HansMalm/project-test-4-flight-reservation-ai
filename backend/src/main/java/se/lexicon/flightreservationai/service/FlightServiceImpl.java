@@ -18,12 +18,12 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public List<Flight> listAllFlights() {
-        return flightRepository.findAll();
+        return flightRepository.findAllByOrderByDepartureTimeAsc();
     }
 
     @Override
     public List<Flight> listAvailableFlights() {
-        return flightRepository.findAll().stream()
+        return flightRepository.findAllByOrderByDepartureTimeAsc().stream()
                 .filter(flight -> flight.getSeatsRemaining() > 0)
                 .collect(Collectors.toList());
     }
