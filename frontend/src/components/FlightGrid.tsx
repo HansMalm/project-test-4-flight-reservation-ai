@@ -6,7 +6,11 @@ import FlightCard from './FlightCard'
 import BookingModal from './BookingModal'
 import './FlightGrid.css'
 
-function FlightGrid() {
+interface FlightGridProps {
+  priceRange: [number, number]
+}
+
+function FlightGrid({ priceRange }: FlightGridProps) {
   const [flights, setFlights] = useState<Flight[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -52,14 +56,19 @@ function FlightGrid() {
     return <p className="flight-grid-status">{error}</p>
   }
 
-  if (flights.length === 0) {
+  const [minPrice, maxPrice] = priceRange
+  const visibleFlights = flights.filter(
+    (flight) => flight.priceValue >= minPrice && flight.priceValue <= maxPrice,
+  )
+
+  if (visibleFlights.length === 0) {
     return <p className="flight-grid-status">No flights were found.</p>
   }
 
   return (
     <>
       <section className="flight-grid" id="flights">
-        {flights.map((flight) => (
+        {visibleFlights.map((flight) => (
           <FlightCard
             key={flight.flightNumber}
             flight={flight}
