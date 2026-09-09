@@ -1,22 +1,30 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { fetchFlights } from '../api/flights'
 import { toDisplayFlight } from '../utils/toDisplayFlight'
 import type { Flight } from '../data/flights'
 import FlightCard from './FlightCard'
+import BookingModal from './BookingModal'
 import './FlightGrid.css'
 
 function FlightGrid() {
   const [flights, setFlights] = useState<Flight[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [bookingFlight, setBookingFlight] = useState<Flight | null>(null)
 
-  useEffect(() => {
+  // useCallback keeps this the same function between renders, so the useEffect
+  // below doesn't re-run on every render. We also call reload() after a
+  // successful booking to pick up the reduced seat counts — it only touches
+  // `flights`/`error`, never `loading`, so the grid (and the open modal on top
+  // of it) stays mounted.
+  const reload = useCallback(() => {
     let cancelled = false
 
     fetchFlights()
       .then((apiFlights) => {
         if (cancelled) return
         setFlights(apiFlights.map(toDisplayFlight))
+        setError(null)
       })
       .catch((err) => {
         if (cancelled) return
@@ -34,6 +42,8 @@ function FlightGrid() {
     }
   }, [])
 
+  useEffect(() => reload(), [reload])
+
   if (loading) {
     return <p className="flight-grid-status">Loading flights…</p>
   }
@@ -47,11 +57,25 @@ function FlightGrid() {
   }
 
   return (
-    <section className="flight-grid" id="flights">
-      {flights.map((flight) => (
-        <FlightCard key={flight.flightNumber} flight={flight} />
-      ))}
-    </section>
+    <>
+      <section className="flight-grid" id="flights">
+        {flights.map((flight) => (
+          <FlightCard
+            key={flight.flightNumber}
+            flight={flight}
+            onBook={setBookingFlight}
+          />
+        ))}
+      </section>
+
+      {bookingFlight && (
+        <BookingModal
+          flight={bookingFlight}
+          onClose={() => setBookingFlight(null)}
+          onBooked={reload}
+        />
+      )}
+    </>
   )
 }
 

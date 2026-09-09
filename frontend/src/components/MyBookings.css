@@ -1,0 +1,39 @@
+.my-bookings {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 32px 40px;
+}
+
+.my-bookings-title {
+  margin: 0 0 16px;
+  font-size: 22px;
+}
+
+.my-bookings-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.my-bookings-form input {
+  flex: 1;
+  max-width: 320px;
+  padding: 8px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--paper);
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.my-bookings-status {
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+
+.my-bookings-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 20px;
+}
