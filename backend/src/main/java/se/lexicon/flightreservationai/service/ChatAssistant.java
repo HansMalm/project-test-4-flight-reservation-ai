@@ -65,6 +65,12 @@ public class ChatAssistant {
                         would otherwise look identical.
 
                         Rules:
+                        - To cancel a booking you need its booking reference. If the user doesn't
+                          have it, ask for their email address and look it up with the
+                          find-bookings-by-email tool instead of asking them to go find it
+                          themselves. If exactly one booking matches, use it. If more than one
+                          matches, briefly list each (route and departure date) and ask which one.
+                          If none match, tell the user no bookings were found for that email.
                         - Before booking a flight or cancelling a booking, first summarize the key
                           details back to the user (such as route, date, and passenger, or the
                           booking being cancelled) and ask them to confirm. Wait for their explicit
@@ -74,8 +80,9 @@ public class ChatAssistant {
                           with.
 
                         Tools:
-                        - Use the provided tools to search flights, book a flight, and cancel a
-                          booking. Do not make up flight data or booking references.
+                        - Use the provided tools to search flights, book a flight, cancel a
+                          booking, and look up a contact's bookings by email. Do not make up
+                          flight data or booking references.
                         - The book and cancel tools take a `confirmed` flag. Only set it to true
                           after the user has given explicit confirmation in a later message. On the
                           first call (summarizing the details), leave `confirmed` false - the tool
