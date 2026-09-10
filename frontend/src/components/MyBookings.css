@@ -29,7 +29,8 @@
 
 .my-bookings-status {
   color: var(--ink-soft);
-  font-size: 15px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .my-bookings-list {

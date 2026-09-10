@@ -1,51 +1,28 @@
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(43, 29, 16, 0.55);
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 48px 16px;
-  overflow-y: auto;
-  z-index: 100;
-}
-
-.modal {
-  position: relative;
-  background: var(--paper);
-  border: 1px solid var(--rule);
-  border-radius: 6px;
-  padding: 28px 32px;
-  width: 100%;
+.booking-page {
   max-width: 460px;
+  margin: 0 auto;
+  padding: 32px 32px 40px;
 }
 
-.modal-close {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  background: none;
-  border: none;
-  font-size: 26px;
-  line-height: 1;
+.booking-page-status {
   color: var(--ink-soft);
-  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
 }
 
-.modal-close:hover {
-  color: var(--ink);
-}
-
-.modal h2 {
+.booking-page h2 {
   margin: 0 0 4px;
   font-size: 20px;
 }
 
 .booking-form-flight {
   margin: 0 0 18px;
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 600;
   color: var(--ink-soft);
 }
+
+/* --- form --- */
 
 .booking-field {
   display: flex;
@@ -55,7 +32,8 @@
 }
 
 .booking-field span {
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 600;
   color: var(--ink-soft);
 }
 
@@ -77,7 +55,8 @@
 }
 
 .booking-passengers legend {
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 600;
   color: var(--ink-soft);
   padding: 0 6px;
 }
@@ -104,7 +83,8 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 600;
   color: var(--ink-soft);
   white-space: nowrap;
 }
@@ -114,7 +94,8 @@
   border: none;
   color: var(--accent-orange);
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -128,7 +109,8 @@
   border-radius: 4px;
   padding: 6px 12px;
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 600;
   color: var(--ink-soft);
   cursor: pointer;
 }
@@ -145,13 +127,57 @@
   border-radius: 4px;
   background: rgba(193, 68, 14, 0.08);
   color: var(--accent-orange-dark);
-  font-size: 14px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .book-btn:disabled {
   opacity: 0.6;
   cursor: default;
 }
+
+/* --- review --- */
+
+.booking-review-contact {
+  margin: 0 0 16px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 16px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.booking-review-contact dt {
+  color: var(--ink-soft);
+}
+
+.booking-review-contact dd {
+  margin: 0;
+}
+
+.booking-review-passengers {
+  margin: 0 0 16px;
+  padding-left: 20px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.child-tag {
+  color: var(--ink-soft);
+}
+
+.booking-review-total {
+  margin: 0 0 18px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.booking-review-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* --- success --- */
 
 .booking-success {
   text-align: center;
@@ -169,7 +195,14 @@
 }
 
 .booking-success-hint {
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 600;
   color: var(--ink-soft);
   margin-bottom: 18px !important;
+}
+
+.booking-success-links {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
 }
