@@ -45,8 +45,9 @@
 }
 
 .booking-card-route .code {
-  font-size: 17px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-soft);
 }
 
 .booking-card-route .arrow {
@@ -54,9 +55,8 @@
 }
 
 .booking-card-route .cities {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--ink-soft);
+  font-size: 17px;
+  font-weight: 700;
 }
 
 .booking-card-details {
