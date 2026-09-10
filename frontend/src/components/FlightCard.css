@@ -32,14 +32,14 @@
 }
 
 .flight-card-airport .code {
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.flight-card-airport .city {
   font-size: 16px;
   font-weight: 600;
   color: var(--ink-soft);
+}
+
+.flight-card-airport .city {
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .flight-card-line {
