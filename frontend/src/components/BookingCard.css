@@ -21,7 +21,7 @@
 }
 
 .booking-status {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -54,7 +54,8 @@
 }
 
 .booking-card-route .cities {
-  font-size: 12px;
+  font-size: 16px;
+  font-weight: 600;
   color: var(--ink-soft);
   margin-left: 4px;
 }
@@ -62,7 +63,8 @@
 .booking-card-details {
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 600;
   color: var(--ink-soft);
   border-top: 1px solid var(--rule);
   padding-top: 10px;
@@ -71,12 +73,14 @@
 .booking-card-passengers {
   margin: 0;
   padding-left: 18px;
-  font-size: 14px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .booking-card-passengers .child-tag {
   color: var(--ink-soft);
-  font-size: 12px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .booking-card-footer {

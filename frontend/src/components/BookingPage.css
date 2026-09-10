@@ -6,7 +6,8 @@
 
 .booking-page-status {
   color: var(--ink-soft);
-  font-size: 15px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .booking-page h2 {
@@ -16,7 +17,8 @@
 
 .booking-form-flight {
   margin: 0 0 18px;
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 600;
   color: var(--ink-soft);
 }
 
@@ -30,7 +32,8 @@
 }
 
 .booking-field span {
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 600;
   color: var(--ink-soft);
 }
 
@@ -52,7 +55,8 @@
 }
 
 .booking-passengers legend {
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 600;
   color: var(--ink-soft);
   padding: 0 6px;
 }
@@ -79,7 +83,8 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 600;
   color: var(--ink-soft);
   white-space: nowrap;
 }
@@ -89,7 +94,8 @@
   border: none;
   color: var(--accent-orange);
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -103,7 +109,8 @@
   border-radius: 4px;
   padding: 6px 12px;
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 600;
   color: var(--ink-soft);
   cursor: pointer;
 }
@@ -120,7 +127,8 @@
   border-radius: 4px;
   background: rgba(193, 68, 14, 0.08);
   color: var(--accent-orange-dark);
-  font-size: 14px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .book-btn:disabled {
@@ -135,7 +143,8 @@
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 4px 16px;
-  font-size: 14px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .booking-review-contact dt {
@@ -149,7 +158,8 @@
 .booking-review-passengers {
   margin: 0 0 16px;
   padding-left: 20px;
-  font-size: 14px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .child-tag {
@@ -185,7 +195,8 @@
 }
 
 .booking-success-hint {
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 600;
   color: var(--ink-soft);
   margin-bottom: 18px !important;
 }

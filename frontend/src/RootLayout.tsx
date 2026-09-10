@@ -7,7 +7,9 @@ function RootLayout() {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <main className="page-content">
+        <Outlet />
+      </main>
       <Footer />
       <ChatWidget />
     </>

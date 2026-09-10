@@ -39,6 +39,22 @@ a:hover {
   color: var(--accent-orange-dark);
 }
 
+/* Sticky footer: #root is a full-height column, the routed page content grows
+   to fill leftover space so Footer sits at the bottom on short pages. */
+html, body, #root {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-content {
+  flex: 1 0 auto;
+}
+
 .layout {
   display: flex;
   align-items: flex-start;
