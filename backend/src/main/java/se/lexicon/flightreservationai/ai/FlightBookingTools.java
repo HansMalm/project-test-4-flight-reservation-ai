@@ -4,6 +4,7 @@ import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.stereotype.Component;
 import se.lexicon.flightreservationai.dto.PassengerInfo;
 import se.lexicon.flightreservationai.entity.Booking;
+import se.lexicon.flightreservationai.entity.BookingStatus;
 import se.lexicon.flightreservationai.entity.Flight;
 import se.lexicon.flightreservationai.entity.Passenger;
 import se.lexicon.flightreservationai.exception.FlightBookingException;
@@ -68,18 +69,19 @@ public class FlightBookingTools {
         }
     }
 
-    @Tool(description = "Look up a contact's bookings by email address. Use this when the user wants "
-            + "to cancel a booking but doesn't know their booking reference. Returns each matching "
-            + "booking's reference, flight number, route, departure time, and status.")
+    @Tool(description = "Look up a contact's still-active (not yet cancelled) bookings by email "
+            + "address. Use this when the user wants to cancel a booking but doesn't know their "
+            + "booking reference. Returns each matching booking's reference, flight number, route, "
+            + "and departure time.")
     public List<BookingSummary> findBookingsByEmail(String email) {
         return bookingService.listBookingsByEmail(email).stream()
+                .filter(booking -> booking.getStatus() == BookingStatus.CONFIRMED)
                 .map(booking -> new BookingSummary(
                         booking.getBookingReference(),
                         booking.getFlight().getFlightNumber(),
                         booking.getFlight().getOrigin(),
                         booking.getFlight().getDestination(),
-                        booking.getFlight().getDepartureTime(),
-                        booking.getStatus().name()))
+                        booking.getFlight().getDepartureTime()))
                 .toList();
     }
 
@@ -105,6 +107,6 @@ public class FlightBookingTools {
      * deliberately excludes passenger details, which aren't needed to pick the right one to cancel.
      */
     public record BookingSummary(String bookingReference, String flightNumber, String origin,
-                                  String destination, LocalDateTime departureTime, String status) {
+                                  String destination, LocalDateTime departureTime) {
     }
 }
