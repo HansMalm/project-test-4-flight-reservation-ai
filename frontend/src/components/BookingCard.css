@@ -88,3 +88,35 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.booking-card-confirm {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.book-btn-outline {
+  background: none;
+  color: var(--ink-soft);
+  border: 1px solid var(--rule);
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.book-btn-outline:hover {
+  border-color: var(--ink-soft);
+}
+
+.book-btn-outline:disabled {
+  opacity: 0.6;
+  cursor: default;
+}

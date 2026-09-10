@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { ApiBooking } from '../api/bookings'
 import { toDisplayFlight } from '../utils/toDisplayFlight'
 import './BookingCard.css'
@@ -11,6 +12,12 @@ interface BookingCardProps {
 function BookingCard({ booking, onCancel, cancelling }: BookingCardProps) {
   const flight = toDisplayFlight(booking.flight)
   const isConfirmed = booking.status === 'CONFIRMED'
+  const [confirming, setConfirming] = useState(false)
+
+  function handleConfirmCancel() {
+    setConfirming(false)
+    onCancel(booking.bookingReference)
+  }
 
   return (
     <article className="booking-card">
@@ -50,15 +57,36 @@ function BookingCard({ booking, onCancel, cancelling }: BookingCardProps) {
 
       <div className="booking-card-footer">
         <span className="price">{formatTotal(booking.totalPrice)}</span>
-        {isConfirmed && (
+        {isConfirmed && !confirming && (
           <button
             type="button"
             className="book-btn"
             disabled={cancelling}
-            onClick={() => onCancel(booking.bookingReference)}
+            onClick={() => setConfirming(true)}
           >
-            {cancelling ? 'Cancelling…' : 'Cancel booking'}
+            Cancel booking
           </button>
+        )}
+        {isConfirmed && confirming && (
+          <div className="booking-card-confirm">
+            <span>Cancel this booking?</span>
+            <button
+              type="button"
+              className="book-btn"
+              disabled={cancelling}
+              onClick={handleConfirmCancel}
+            >
+              {cancelling ? 'Cancelling…' : 'Yes, cancel'}
+            </button>
+            <button
+              type="button"
+              className="book-btn-outline"
+              disabled={cancelling}
+              onClick={() => setConfirming(false)}
+            >
+              Never mind
+            </button>
+          </div>
         )}
       </div>
     </article>
