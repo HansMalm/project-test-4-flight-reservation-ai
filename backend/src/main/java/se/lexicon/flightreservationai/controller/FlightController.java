@@ -2,6 +2,7 @@ package se.lexicon.flightreservationai.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import se.lexicon.flightreservationai.dto.FlightResponse;
@@ -37,5 +38,11 @@ public class FlightController {
                 .map(flightMapper::toResponse)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(flights);
+    }
+
+    @GetMapping("/{flightNumber}")
+    public ResponseEntity<FlightResponse> getFlight(@PathVariable String flightNumber) {
+        FlightResponse flight = flightMapper.toResponse(flightService.getByFlightNumber(flightNumber));
+        return ResponseEntity.ok(flight);
     }
 }
