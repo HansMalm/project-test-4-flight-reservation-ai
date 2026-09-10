@@ -95,6 +95,18 @@
   background: var(--accent-orange-dark);
 }
 
+/* The bookable card action is a router <Link> (renders an <a>); keep it
+   looking exactly like the button. */
+a.book-btn {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--paper);
+}
+
+a.book-btn:hover {
+  color: var(--paper);
+}
+
 .book-btn:disabled {
   opacity: 0.6;
   cursor: default;

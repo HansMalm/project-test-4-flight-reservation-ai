@@ -1,13 +1,13 @@
+import { Link } from 'react-router-dom'
 import type { Flight } from '../data/flights'
 import CountryFlag from './CountryFlag'
 import './FlightCard.css'
 
 interface FlightCardProps {
   flight: Flight
-  onBook: (flight: Flight) => void
 }
 
-function FlightCard({ flight, onBook }: FlightCardProps) {
+function FlightCard({ flight }: FlightCardProps) {
   return (
     <article className="flight-card">
       <div className="flight-card-flag">
@@ -52,14 +52,15 @@ function FlightCard({ flight, onBook }: FlightCardProps) {
 
       <div className="flight-card-footer">
         <span className="price">{flight.price}</span>
-        <button
-          type="button"
-          className="book-btn"
-          onClick={() => onBook(flight)}
-          disabled={flight.seatsRemaining === 0}
-        >
-          {flight.seatsRemaining === 0 ? 'Full' : 'Book'}
-        </button>
+        {flight.seatsRemaining === 0 ? (
+          <button type="button" className="book-btn" disabled>
+            Full
+          </button>
+        ) : (
+          <Link to={`/book/${flight.flightNumber}`} className="book-btn">
+            Book
+          </Link>
+        )}
       </div>
     </article>
   )

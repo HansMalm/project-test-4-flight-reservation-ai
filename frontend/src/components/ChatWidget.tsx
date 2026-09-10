@@ -29,7 +29,7 @@ function ChatWidget() {
   }, [open])
 
   // Close the panel on Escape while it's open. Cleanup removes the listener so
-  // it doesn't pile up across opens. Same pattern as BookingModal.
+  // it doesn't pile up across opens.
   useEffect(() => {
     if (!open) return
     function onKeyDown(event: KeyboardEvent) {

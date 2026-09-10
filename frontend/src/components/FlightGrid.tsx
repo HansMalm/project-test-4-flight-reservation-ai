@@ -3,7 +3,6 @@ import { fetchFlights } from '../api/flights'
 import { toDisplayFlight } from '../utils/toDisplayFlight'
 import type { Flight } from '../data/flights'
 import FlightCard from './FlightCard'
-import BookingModal from './BookingModal'
 import './FlightGrid.css'
 
 interface FlightGridProps {
@@ -15,13 +14,11 @@ function FlightGrid({ priceRange, onlyAvailable }: FlightGridProps) {
   const [flights, setFlights] = useState<Flight[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [bookingFlight, setBookingFlight] = useState<Flight | null>(null)
 
   // useCallback keeps this the same function between renders, so the useEffect
   // below only re-runs when `onlyAvailable` changes (toggling the filter
-  // re-fetches). We also call reload() after a successful booking to pick up
-  // the reduced seat counts — it only touches `flights`/`error`, never
-  // `loading`, so the grid (and the open modal on top of it) stays mounted.
+  // re-fetches). The grid also re-fetches whenever FlightsPage remounts, e.g.
+  // after returning from the booking page, so seat counts stay fresh.
   const reload = useCallback(() => {
     let cancelled = false
 
@@ -67,25 +64,11 @@ function FlightGrid({ priceRange, onlyAvailable }: FlightGridProps) {
   }
 
   return (
-    <>
-      <section className="flight-grid" id="flights">
-        {visibleFlights.map((flight) => (
-          <FlightCard
-            key={flight.flightNumber}
-            flight={flight}
-            onBook={setBookingFlight}
-          />
-        ))}
-      </section>
-
-      {bookingFlight && (
-        <BookingModal
-          flight={bookingFlight}
-          onClose={() => setBookingFlight(null)}
-          onBooked={reload}
-        />
-      )}
-    </>
+    <section className="flight-grid" id="flights">
+      {visibleFlights.map((flight) => (
+        <FlightCard key={flight.flightNumber} flight={flight} />
+      ))}
+    </section>
   )
 }
 

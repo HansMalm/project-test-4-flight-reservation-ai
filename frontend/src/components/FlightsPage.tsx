@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Hero from './Hero'
 import Sidebar from './Sidebar'
 import FlightGrid from './FlightGrid'
 
@@ -7,15 +8,18 @@ function FlightsPage() {
   const [onlyAvailable, setOnlyAvailable] = useState(true)
 
   return (
-    <div className="layout">
-      <Sidebar
-        priceRange={priceRange}
-        onPriceRangeChange={setPriceRange}
-        onlyAvailable={onlyAvailable}
-        onAvailabilityChange={setOnlyAvailable}
-      />
-      <FlightGrid priceRange={priceRange} onlyAvailable={onlyAvailable} />
-    </div>
+    <>
+      <Hero />
+      <div className="layout">
+        <Sidebar
+          priceRange={priceRange}
+          onPriceRangeChange={setPriceRange}
+          onlyAvailable={onlyAvailable}
+          onAvailabilityChange={setOnlyAvailable}
+        />
+        <FlightGrid priceRange={priceRange} onlyAvailable={onlyAvailable} />
+      </div>
+    </>
   )
 }
 
