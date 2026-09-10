@@ -41,7 +41,7 @@ a:hover {
 
 /* Sticky footer: #root is a full-height column, the routed page content grows
    to fill leftover space so Footer sits at the bottom on short pages. */
-html, body, #root {
+html, body {
   height: 100%;
 }
 
