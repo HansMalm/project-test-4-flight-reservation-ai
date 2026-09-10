@@ -31,11 +31,11 @@ function BookingCard({ booking, onCancel, cancelling }: BookingCardProps) {
       </div>
 
       <div className="booking-card-route">
-        <span className="code">{flight.originCode}</span>
+        <span className="cities">{flight.originCity}</span>
         <span className="arrow">→</span>
-        <span className="code">{flight.destCode}</span>
-        <span className="cities">
-          {flight.originCity} – {flight.destCity}
+        <span className="cities">{flight.destCity}</span>
+        <span className="code">
+          {flight.originCode} – {flight.destCode}
         </span>
       </div>
 
