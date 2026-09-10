@@ -9,4 +9,6 @@ public interface FlightService {
     List<Flight> listAllFlights();
 
     List<Flight> listAvailableFlights();
+
+    Flight getByFlightNumber(String flightNumber);
 }
