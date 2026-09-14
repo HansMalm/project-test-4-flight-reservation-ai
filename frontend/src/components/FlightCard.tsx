@@ -16,8 +16,8 @@ function FlightCard({ flight }: FlightCardProps) {
 
       <div className="flight-card-route">
         <div className="flight-card-airport">
-          <span className="code">{flight.originCode}</span>
           <span className="city">{flight.originCity}</span>
+          <span className="code">{flight.originCode}</span>
         </div>
 
         <div className="flight-card-line">
@@ -39,8 +39,8 @@ function FlightCard({ flight }: FlightCardProps) {
         </div>
 
         <div className="flight-card-airport">
-          <span className="code">{flight.destCode}</span>
           <span className="city">{flight.destCity}</span>
+          <span className="code">{flight.destCode}</span>
         </div>
       </div>
 
