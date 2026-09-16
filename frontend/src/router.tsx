@@ -15,7 +15,6 @@ const router = createBrowserRouter(
       ],
     },
   ],
-  { basename: '/project-test-4-flight-reservation-ai/' },
 )
 
 export default router
